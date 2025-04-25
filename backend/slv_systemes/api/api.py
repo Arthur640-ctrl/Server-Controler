@@ -6,5 +6,5 @@ app = Flask(__name__)
 def home():
     return jsonify(message="Bienvenue sur l'API test !")
 
-def api_start(debug_mode):
-    app.run(debug=debug_mode)
+def api_start():
+    app.run()

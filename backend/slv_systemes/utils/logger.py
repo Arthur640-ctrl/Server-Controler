@@ -3,7 +3,7 @@ from datetime import datetime
 from backend.slv_systemes.utils.utils import get_date_hours, load
 
 class Logger:
-    def __init__(self, log_conf_file:str, style={"debug":Fore.BLUE, "info":Fore.GREEN, "warn":Fore.YELLOW, "error":Fore.RED}):
+    def __init__(self, log_conf_file:str, style={"debug":Fore.BLUE, "info":Fore.GREEN, "warn":Fore.YELLOW, "error":Fore.RED}, log_levels=3):
         """
         Initializes the style and default prefixes,  
         loads the settings, and creates a new log file.
@@ -15,6 +15,8 @@ class Logger:
         self.prefix_info = "INFO"
         self.prefix_warn = "WARN"
         self.prefix_error = "ERROR"
+
+        self.log_level = log_levels
 
         self.log_settings = load(log_conf_file, "json")
 
@@ -101,12 +103,15 @@ class Logger:
             log_file.write(log)
 
     def debug(self, message: str):
-        if self.set_on_console == True:
-            prefix = self.create_prefix("debug", log_type="console")
-            print(self.style["debug"] + prefix + message + Fore.RESET)
-        if self.set_on_file == True:
-            prefix = self.create_prefix("debug", log_type="file")
-            self.write_log(log=f"{prefix} {message}\n")
+        if self.log_level == 4 or self.log_level > 4:
+            if self.set_on_console == True:
+                prefix = self.create_prefix("debug", log_type="console")
+                print(self.style["debug"] + prefix + message + Fore.RESET)
+            if self.set_on_file == True:
+                prefix = self.create_prefix("debug", log_type="file")
+                self.write_log(log=f"{prefix} {message}\n")
+        else:
+            pass
 
     def info(self, message: str):
         if self.set_on_console == True:
