@@ -2,7 +2,7 @@ import time
 from backend.slv_systemes.utils.utils import load, push_value, save, get_date_hours
 import datetime
 
-def start(uptime_path="uptime.json"):
+def start(uptime_path="backend/config/uptime.json"):
     data = load(uptime_path, "json")
     
     now = get_date_hours("default")

@@ -2,7 +2,7 @@ from backend.slv_systemes.monitoring.uptime.uptime import start_uptime
 from backend.slv_systemes.utils.utils import load, push_value, save, get_date_hours
 
 class Uptime:
-    def __init__(self, uptime_file_path="uptime.json"):
+    def __init__(self, uptime_file_path="backend/config/uptime.json"):
         self.path_file = uptime_file_path
 
     def start(self):
