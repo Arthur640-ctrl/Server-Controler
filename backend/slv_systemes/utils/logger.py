@@ -4,6 +4,11 @@ from backend.slv_systemes.utils.utils import get_date_hours, load
 
 class Logger:
     def __init__(self, log_conf_file:str, style={"debug":Fore.BLUE, "info":Fore.GREEN, "warn":Fore.YELLOW, "error":Fore.RED}):
+        """
+        Initializes the style and default prefixes,  
+        loads the settings, and creates a new log file.
+        """
+
         self.style = style
 
         self.prefix_debug = "DEBUG"
@@ -32,6 +37,13 @@ class Logger:
             log_file.write(f"========== Log file of {self.new_file_logs_name} ========== \n")
 
     def create_prefix(self, levels, log_type, date_style=None, prefix_style="default"):
+        """
+        Creates a prefix based on the log configuration.
+        Two possibilities:
+        - Console prefixes
+        - File prefixes
+        """
+
         if date_style is None:
             if log_type == "console":
                 date_style = self.log_settings["on_console_config"]["date_style"]
@@ -82,6 +94,9 @@ class Logger:
                 return f"{now} {self.prefix_error}"
 
     def write_log(self, log):
+        """
+        Write in the file of logs.
+        """
         with open(f"{self.logs_files_path}/{self.new_file_logs_name}.log", "a") as log_file:
             log_file.write(log)
 
